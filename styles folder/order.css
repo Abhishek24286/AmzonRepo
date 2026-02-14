@@ -1,0 +1,28 @@
+.main{
+    max-width:850px;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:100px;
+}
+.order-div{
+    font-size:24px;
+    color:#212121;
+    font-family:Roboto;
+    font-weight:bold;
+}
+.order-content-grid{
+    height:200px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-bottom:20px;
+    padding-top:20px;
+    width:100%;
+    background-color:lightpink;
+    margin-top:30px;
+}
+.content-header{
+    background-color:lightgreen;
+    padding-bottom:20px;
+    height:50px;
+}

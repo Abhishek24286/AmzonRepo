@@ -1,0 +1,92 @@
+.order-symmary{
+    font-size:18px;
+    color:#212121;
+    font-weight:bold;
+    height:21.53px;
+    font-family:Roboto;
+    margin-bottom:8px;
+}
+.payment-info{
+    display:flex;
+    flex-direction:column;
+    row-gap:12px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:rgb(228, 226, 226);
+    padding-bottom:10px;
+    font-family:Arial;
+    font-size:16px;
+}
+.js-items{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.shipping-handling{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.totalAmount{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:27px;
+    padding-top:10px;
+}
+.totalAmounxtBeforetax{
+    border-top-style:solid;
+    border-top-color:rgb(228, 226, 226);
+    border-top-width:1px;
+     padding-top:10px;
+}
+.EstimatedTax{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.finalTotal{
+  height:40px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+}
+.order-total{
+    font-size:18px;
+    font-family:Roboto;
+    font-weight:bold;
+    color:#B12704;
+}
+.total-amount{
+     font-size:18px;
+    font-family:Roboto;
+    font-weight:bold; 
+    color:#B12704; 
+}
+.place-order{
+    display:flex;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.place-order-link{
+    text-decoration:none;
+    color:#212121;
+      font-size:14px;
+    font-family:Arial;
+}
+
+.place-order-button{
+     flex:1;
+    height:41px;
+    background-color:#FFD814;
+    
+    border:none;
+    border-radius:5px;
+  
+    border-radius:8px;
+    cursor:pointer;
+}
+.place-order-button:hover{
+    opacity:0.8;
+}
