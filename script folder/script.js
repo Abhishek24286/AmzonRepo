@@ -1,9 +1,9 @@
-    
+      
       import {TodoList} from './product-data.js'; 
       import {cartElement,addToCart,updateCartQuantity} from './cart.js';        
 
 let combineHTML = '';
-
+  
 for (let i = 0; i < TodoList.length; i++) {
   const Todo = TodoList[i];
 
@@ -106,7 +106,7 @@ document.querySelector('.main-container').innerHTML = combineHTML;
       behavior:"smooth"
     });
   });
- 
+
 
   
    

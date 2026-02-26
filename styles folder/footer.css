@@ -1,6 +1,7 @@
-.footer-div{
 
-      background-color:#232F3E;
+.footer-div{
+      background-color:#232F3E; 
+     margin-top:630vh;    
 }
 .back-to-top{
     background-color:#37475A;
@@ -8,8 +9,8 @@
     flex-direction:row;
     align-items:center;
     justify-content:center;
-       padding-top:15px;
-       padding-bottom:15px;
+    padding-top:15px;
+    padding-bottom:15px;
     
 }
 .back-to-top:hover{

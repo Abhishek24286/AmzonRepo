@@ -1,10 +1,25 @@
+body{
+  position:relative;
+  background-color:rgb(193, 190, 190);
+}
+
 .main-container{
   display:grid;
-  grid-template-columns:repeat(7 ,1fr);
+  grid-template-columns:repeat(6 ,1fr);
+  column-gap:15px;
+
+  row-gap:15px;
+  padding-left:10px;
+  padding-right:10px;
+  z-index:500;
+  position:absolute;
+  top:340px;
+  
+ 
 }
 @media (max-width: 2000px) {
   .main-container {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -12,25 +27,25 @@
    less, we will divide the grid into 6 columns. */
 @media (max-width: 1600px) {
   .main-container {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (max-width: 1300px) {
   .main-container {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 1000px) {
 .main-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 800px) {
  .main-container{
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -50,15 +65,30 @@
   margin:0;
 }
 
+.product-details-container{
+ background-color:white;
+ display:flex;
+ flex-direction:column;
+ padding-left:25px;
+ padding-right:25px;
+ padding-top:40px;
+ padding-bottom:25px;
+ border-right-style:solid;
+ border-bottom-style:solid;
+ border-color:rgb(219, 211, 211);
+ border-width:1px;
+ 
+ 
 
+}
 
 .product-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 180px;
   margin-bottom: 20px;
+
 }
 
 
@@ -71,21 +101,7 @@
 }  
 
 
-.product-details-container{
- 
- display:flex;
- flex-direction:column;
- padding-left:25px;
- padding-right:25px;
- padding-top:40px;
- padding-bottom:25px;
- border-right-style:solid;
- border-bottom-style:solid;
- border-color:rgb(219, 211, 211);
- border-width:1px;
- 
 
-}
 .product-image-container{
   height:180px;
  
