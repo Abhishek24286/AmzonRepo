@@ -1,9 +1,9 @@
-      
-      import {TodoList} from './product-data.js'; 
-      import {cartElement,addToCart,updateCartQuantity} from './cart.js';        
+
+import { TodoList } from './product-data.js';
+import { cartElement, addToCart, updateCartQuantity } from './cart.js';
 
 let combineHTML = '';
-  
+
 for (let i = 0; i < TodoList.length; i++) {
   const Todo = TodoList[i];
 
@@ -20,11 +20,11 @@ for (let i = 0; i < TodoList.length; i++) {
       </div>
 
       <div class="product-rating">
-        <img class="product-rating-class" src="images/ratings/rating-${Todo.rating.stars *10}.png">
+        <img class="product-rating-class" src="images/ratings/rating-${Todo.rating.stars * 10}.png">
         <div class="product-rating-count">${Todo.rating.count}</div>
       </div>
 
-      <div class="product-price">Rs ${(Todo.priceCents/10).toFixed(2)}</div>
+      <div class="product-price">Rs ${(Todo.priceCents / 10).toFixed(2)}</div>
 
       <div class="product-quantity">
         <select class="select-menu"  data-product-id="${Todo.id}">
@@ -51,68 +51,54 @@ for (let i = 0; i < TodoList.length; i++) {
   combineHTML += html;
 }
 updateCartQuantity();
-
-
-
 document.querySelector('.main-container').innerHTML = combineHTML;
-
-
- document.querySelectorAll('.add-to-cart-button')
+document.querySelectorAll('.add-to-cart-button')
   .forEach(button => {
     button.addEventListener('click', () => {
-
       const productId = button.dataset.productId;
-
       addToCart(productId);
       updateCartQuantity();
-
-      // ✅ find correct message element
       const container = button.closest('.add-to-cart-button2');
       const message = container.querySelector('.added-to-cart');
-
       message.textContent = "Added ";
-
       setTimeout(() => {
         message.textContent = "";
       }, 2000);
 
     });
   });
- let count=1;
-  document.querySelector('.home-menu')
-  .addEventListener('click',()=>{
-    let cartQuantity=updateCartQuantity();
-      if(count % 2===1){
-          const html=`
+let count = 1;
+document.querySelector('.home-menu')
+  .addEventListener('click', () => {
+    let cartQuantity = updateCartQuantity();
+    if (count % 2 === 1) {
+      const html = `
       <div class="menu-bar">
       <a class= "Return-link"href="Orders.html">Returns & Orders</a>
       <a class="return-to-cart" href="checkout.html">Cart(<span class="cart-design-items">${cartQuantity}</span>)</a>
     </div>
     `;
-    
-         document.querySelector('.js-menu-bar-selector').innerHTML=html;
-         
-      }
-      else{
-   document.querySelector('.js-menu-bar-selector').innerHTML='';
+      document.querySelector('.js-menu-bar-selector').innerHTML = html;
+    }
+    else {
+      document.querySelector('.js-menu-bar-selector').innerHTML = '';
 
-      }
-      count+=1;
+    }
+    count += 1;
   });
-  document.querySelector('.js-top-button')
-  .addEventListener('click',()=>{
+document.querySelector('.js-top-button')
+  .addEventListener('click', () => {
     window.scrollTo({
-      top:0,
-      behavior:"smooth"
+      top: 0,
+      behavior: "smooth"
     });
   });
 
 
-  
-   
-  
-  
 
- 
 
- 
+
+
+
+
+

@@ -7,14 +7,12 @@ const slides = document.querySelectorAll('.common-image');
 let index = 0;
 
 
-// NEXT BUTTON
 nextBtn.addEventListener('click', () => {
   index = (index + 1) % slides.length;
   updateSlide();
 });
 
 
-// PREVIOUS BUTTON
 prevBtn.addEventListener('click', () => {
   index = (index - 1 + slides.length) % slides.length;
   updateSlide();
@@ -26,11 +24,11 @@ function updateSlide() {
 }
 
 
-// ⭐ AUTO SCROLL
+
 setInterval(() => {
   index = (index + 1) % slides.length;
   updateSlide();
-}, 3000);   // change every 3 seconds
+}, 3000);   
 
 
 

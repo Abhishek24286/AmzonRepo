@@ -1,6 +1,6 @@
 body{
   position:relative;
-  background-color:rgb(193, 190, 190);
+  background-color:rgb(245, 239, 239);
 }
 
 .main-container{
@@ -16,6 +16,13 @@ body{
   top:340px;
   
  
+}
+@media(max-width:600px){
+  .main-container{
+    position:unset;
+    row-gap:unset;
+    column-gap:unset;
+  }
 }
 @media (max-width: 2000px) {
   .main-container {

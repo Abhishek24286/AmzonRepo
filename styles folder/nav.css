@@ -13,12 +13,14 @@
     padding-right:10px;
     padding-top:3px;
     z-index:5000;
-  
     
 }
-@media(max-width:1000px){
-    .nav-select a{
-        font-size:12px;
+@media(max-width:1300px){
+    #nav-10{
+        display:none;
+    }
+    #nav-9{
+        display:none;
     }
 }
 .nav-select a {
