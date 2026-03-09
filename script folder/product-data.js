@@ -11,7 +11,11 @@ export const TodoList = [
     keywords: [
       "Asus",
       "Asus tuf a15",
-      "apparel"
+      "apparel",
+      "laptop",
+      "Gamming laptop",
+      "PC",
+
     ]
   },
   {
@@ -26,7 +30,9 @@ export const TodoList = [
     keywords: [
       "socks",
       "sports",
-      "apparel"
+      "apparel",
+      "Socks For men",
+      
     ]
   },
   {

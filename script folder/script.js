@@ -8,7 +8,7 @@ for (let i = 0; i < TodoList.length; i++) {
   const Todo = TodoList[i];
 
   const html = `
-    <div class="product-details-container">
+    <div class="product-details-container" data-container-id="${Todo.id}">
       <div class="product-image-container">
         <img class="main-image" src="${Todo.image}">
       </div>
@@ -93,8 +93,26 @@ document.querySelector('.js-top-button')
       behavior: "smooth"
     });
   });
+const searchInput = document.querySelector('.search-bar');
+const productsContainer = document.querySelectorAll('.product-details-container');
 
+searchInput.addEventListener('keyup', () => {
 
+  const searchValue = searchInput.value.toLowerCase();
+
+  TodoList.forEach((product, index) => {
+
+    const keywordString = product.keywords.join(" ").toLowerCase();
+
+    if (keywordString.includes(searchValue)) {
+      productsContainer[index].style.display = "block";
+    } else {
+      productsContainer[index].style.display = "none";
+    }
+
+  });
+
+});
 
 
 
