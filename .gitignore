@@ -1,4 +1,5 @@
-/.github
-.env
-/backend/node_modules
-/.vscode
+node_modules/
+.vscode/
+backend/.env
+.github/
+*.log
