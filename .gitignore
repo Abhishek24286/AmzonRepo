@@ -1,0 +1,4 @@
+/.github
+.env
+/backend/node_modules
+/.vscode
