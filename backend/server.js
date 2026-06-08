@@ -11,13 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 app.get('/checkout',(req,res)=>{
-     res.sendFile(path.join(__dirname, '../checkout.html'));
+     res.sendFile(path.join(__dirname, '../public/checkout.html'));
 });
 app.get('/checkout/order',(req,res)=>{
-     res.sendFile(path.join(__dirname, '../Orders.html'));
+     res.sendFile(path.join(__dirname, '../public/Orders.html'));
 });
 
 app.listen(PORT, () => {

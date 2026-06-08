@@ -1,73 +1,89 @@
-import { cartElement,removeFromCart,ItemCount} from './cart.js';
-import { TodoList } from './product-data.js';
-import{updatePrice} from './payment-info.js';
+import { cartElement, removeFromCart, ItemCount } from './cart.js';
+import { updatePrice } from './payment-info.js';
 
-let productHTML = '';
+async function loadCheckout() {
 
+  const response = await fetch(
+    'https://amazon-product-api-1.onrender.com/product/api'
+  );
 
-cartElement.forEach(cartItem => {
-  let productExist = null;
+  const TodoList = await response.json();
 
-  TodoList.forEach(product => {
-    if (cartItem.productId === product.id) {
-      productExist = product;
-    }
+  let productHTML = '';
+
+  cartElement.forEach(cartItem => {
+
+    const productExist = TodoList.find(product =>
+      product.id === cartItem.productId
+    );
+
+    if (!productExist) return;
+
+    productHTML += `
+      <div class="product-container product-specific-id-${productExist.id}">
+        <div class="Delivery-date">
+          Delivery date: Monday, February 16
+        </div>
+
+        <div class="product-items">
+          <div class="product-image">
+            <img
+              class="socks-image"
+              src="https://amazon-product-api-1.onrender.com/${productExist.image}"
+            >
+          </div>
+
+          <div class="product-details">
+            <div class="product-details-image">
+              ${productExist.name}
+            </div>
+
+            <div class="product-price">
+              Rs ${(productExist.priceCents / 100).toFixed(2)}
+            </div>
+
+            <div class="js-update-div">
+              <div class="order-quantity">
+                Quantity : ${cartItem.quantity}
+              </div>
+
+              <span class="update">update</span>
+
+              <span
+                class="delete-cart-element"
+                data-product-id="${productExist.id}">
+                delete
+              </span>
+            </div>
+          </div>
+
+          <div class="product-delivery-option"></div>
+        </div>
+      </div>
+    `;
   });
+
+  document.querySelector('.product-flex-container').innerHTML = productHTML;
+
   ItemCount();
-  
+  updatePrice();
 
-  productHTML += `
-    <div class="product-container product-specific-id-${productExist.id}">
-      <div class="Delivery-date">
-        Delivery date: Monday, February 16
-      </div>
+  document.querySelectorAll('.delete-cart-element')
+    .forEach(link => {
+      link.addEventListener('click', () => {
 
-      <div class="product-items">
-        <div class="product-image">
-          <img class="socks-image" src="${productExist.image}">
-        </div>
+        const productId = link.dataset.productId;
 
-        <div class="product-details">
-          <div class="product-details-image">
-            ${productExist.name}
-          </div>
-          <div class="product-price">
-            Rs ${(productExist.priceCents / 10).toFixed(2)}
-          </div>
-          <div class="js-update-div">
-            <div class="order-quantity"> Quantity :${cartItem.quantity}</div>
-            <span class="update">update</span>
-            <span class="delete-cart-element"
-            data-product-id="${productExist.id}">delete</span>
-          </div>
-          
-        </div>
-        
+        removeFromCart(productId);
 
-        <div class="product-delivery-option"></div>
-      </div>
-    </div>
-  `;
-  
-});
-updatePrice();
+        document
+          .querySelector(`.product-specific-id-${productId}`)
+          ?.remove();
 
-document.querySelector('.product-flex-container').innerHTML = productHTML;
-document.querySelectorAll('.delete-cart-element')
-  .forEach((link) => {
-    link.addEventListener('click', () => {
-     const productId = link.dataset.productId;
-      removeFromCart(productId);
-      updatePrice();
-      ItemCount();
-        document.querySelector(`.product-specific-id-${productId}`).remove();
-      
-       
+        ItemCount();
+        updatePrice();
+      });
     });
-   
-   
-  });
- 
+}
 
- 
- 
+loadCheckout();

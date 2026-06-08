@@ -1,133 +1,108 @@
+import { addToCart, updateCartQuantity } from './cart.js';
 
-import { TodoList } from './product-data.js';
-import { cartElement, addToCart, updateCartQuantity } from './cart.js';
+async function loadProducts() {
+  try {
+    const response = await fetch(
+      'https://amazon-product-api-1.onrender.com/product/api'
+    );
 
-let combineHTML = '';
+    const TodoList = await response.json();
 
-for (let i = 0; i < TodoList.length; i++) {
-  const Todo = TodoList[i];
+    let combineHTML = '';
 
-  const html = `
-    <div class="product-details-container" data-container-id="${Todo.id}">
-      <div class="product-image-container">
-        <img class="main-image" src="${Todo.image}">
-      </div>
+    TodoList.forEach((Todo) => {
+      combineHTML += `
+        <div class="product-details-container" data-container-id="${Todo.id}">
+          <div class="product-image-container">
+            <img
+              class="main-image"
+              src="https://amazon-product-api-1.onrender.com/${Todo.image}"
+            >
+          </div>
 
-      <div class="product-name">
-        
-          ${Todo.name}
-        
-      </div>
+          <div class="product-name">
+            ${Todo.name}
+          </div>
 
-      <div class="product-rating">
-        <img class="product-rating-class" src="images/ratings/rating-${Todo.rating.stars * 10}.png">
-        <div class="product-rating-count">${Todo.rating.count}</div>
-      </div>
+          <div class="product-rating">
+            <img
+              class="product-rating-class"
+              src="images/ratings/rating-${Todo.rating.stars * 10}.png"
+            >
+            <div class="product-rating-count">
+              ${Todo.rating.count}
+            </div>
+          </div>
 
-      <div class="product-price">Rs ${(Todo.priceCents / 10).toFixed(2)}</div>
+          <div class="product-price">
+            Rs ${(Todo.priceCents / 100).toFixed(2)}
+          </div>
 
-      <div class="product-quantity">
-        <select class="select-menu"  data-product-id="${Todo.id}">
-          <option>1</option>
-          <option >2</option>
-          <option >3</option>
-          <option >4</option>
-        </select>
-      </div>
+          <div class="product-quantity">
+            <select
+              class="select-menu"
+              data-product-id="${Todo.id}"
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
 
-      <div class="div-space"></div>
-       
-      <div class="add-to-cart-button2">
-          <p class="added-to-cart  067D62"></p>
-     
-        <button class="add-to-cart-button" data-product-id="${Todo.id}">
-        
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  `;
+          <div class="div-space"></div>
 
-  combineHTML += html;
+          <div class="add-to-cart-button2">
+            <p class="added-to-cart"></p>
+
+            <button
+              class="add-to-cart-button"
+              data-product-id="${Todo.id}"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    document.querySelector('.main-container').innerHTML = combineHTML;
+
+    updateCartQuantity();
+
+    document.querySelectorAll('.add-to-cart-button')
+      .forEach(button => {
+        button.addEventListener('click', () => {
+
+          const productId = button.dataset.productId;
+
+          const select = document.querySelector(
+            `.select-menu[data-product-id="${productId}"]`
+          );
+
+          const SelectedQu = Number(select.value);
+
+          addToCart(productId, SelectedQu);
+
+          updateCartQuantity();
+
+          const container =
+            button.closest('.add-to-cart-button2');
+
+          const message =
+            container.querySelector('.added-to-cart');
+
+          message.textContent = 'Added';
+
+          setTimeout(() => {
+            message.textContent = '';
+          }, 2000);
+        });
+      });
+
+  } catch (error) {
+    console.error('Error loading products:', error);
+  }
 }
-updateCartQuantity();
-document.querySelector('.main-container').innerHTML = combineHTML;
-document.querySelectorAll('.add-to-cart-button')
-  .forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = button.dataset.productId;
-      const SelectedQu=1;
-      addToCart(productId,SelectedQu);
-      updateCartQuantity();
-      const container = button.closest('.add-to-cart-button2');
-      const message = container.querySelector('.added-to-cart');
-      message.textContent = "Added ";
-      setTimeout(() => {
-        message.textContent = "";
-      }, 2000);
 
-    });
-  });
-let count = 1;
-document.querySelector('.home-menu')
-  .addEventListener('click', () => {
-    let cartQuantity = updateCartQuantity();
-    if (count % 2 === 1) {
-      const html = `
-      <div class="menu-bar">
-      <a class= "Return-link"href="Orders.html">Returns & Orders</a>
-      <a class="return-to-cart" href="checkout.html">Cart(<span class="cart-design-items">${cartQuantity}</span>)</a>
-    </div>
-    `;
-      document.querySelector('.js-menu-bar-selector').innerHTML = html;
-    }
-    else {
-      document.querySelector('.js-menu-bar-selector').innerHTML = '';
-
-    }
-    count += 1;
-  });
-document.querySelector('.js-top-button')
-  .addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-const searchInput = document.querySelector('.search-bar');
-const productsContainer = document.querySelectorAll('.product-details-container');
-
-searchInput.addEventListener('keyup', () => {
-
-  const searchValue = searchInput.value.toLowerCase();
-
-  TodoList.forEach((product, index) => {
-
-    const keywordString = product.keywords.join(" ").toLowerCase();
-
-    if (keywordString.includes(searchValue)) {
-      productsContainer[index].style.display = "block";
-    } else {
-      productsContainer[index].style.display = "none";
-    }
-
-  });
-
-});
-document.querySelectorAll('.select-menu')
-.forEach(option=>{
-  option.addEventListener('change',(event)=>{
-    const SelectedQu=Number(event.target.value);
-    const productId=option.dataset.productId;
-    addToCart(productId,SelectedQu);
-    
-   
-  });
-});
-
-
-
-
-
-
-
+loadProducts();
